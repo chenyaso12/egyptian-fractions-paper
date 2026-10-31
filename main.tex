@@ -1,0 +1,1441 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=28mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage{enumitem}
+\setlist{nosep}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Li}{\operatorname{Li}}
+\newcommand{\Prob}{\mathbb P}
+\newcommand{\E}{\mathbb E}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\cP}{\mathcal P}
+\newcommand{\cA}{\mathcal A}
+\newcommand{\cQ}{\mathcal Q}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\FI}{F_{\mathrm I}}
+\newcommand{\FII}{F_{\mathrm {II}}}
+\newcommand{\cB}{\mathcal B}
+\title{Complete local counts at prescribed initial positions\newline
+in Erd\H{o}s--Straus decompositions}
+\author{}
+\date{October 30, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+For primes $p\equiv1\pmod4$, we count all unordered Type~I and Type~II
+Erd\H{o}s--Straus decompositions at prescribed initial smallest
+denominators. Put $\delta=2^{-20}$ and $\kappa=(\log3)/8-\delta$.
+Outside one set of $O(X/(\log X)^{1+\delta})$ primes up to $X$,
+uniformly for $a\equiv3\pmod4$, $3\le a\le(\log p)^\delta$, and
+$x=(p+a)/4$, the two counts are
+\[
+ \FI(p,x)=\frac{\tau(x^2)}{\varphi(a)}
+      \bigl(1+O((\log p)^{-\kappa})\bigr),\qquad
+ \FII(p,x)=\frac{\tau(x^2)}{2\varphi(a)}
+      \bigl(1+O((\log p)^{-\kappa})\bigr).
+\]
+On a possibly smaller common good set with the same exceptional-set
+order, each count is bounded below by a constant multiple of
+$(\log p)^{\theta\log3}/\varphi(a)$ for any fixed
+$0<\theta<15/16$. The argument combines established divisor
+parametrizations, finite-group character estimates, and uniform
+distribution estimates for shifted primes. We give both a direct
+support-compressed moment proof and a uniform application of Elliott's
+Bernoulli model.
+\end{abstract}
+\noindent\textbf{Keywords.} Egyptian fractions; prescribed denominators;
+local multiplicities; shifted primes; divisor distributions;
+Bombieri--Vinogradov theorem.
+
+\section{Introduction and main results}
+The Erd\H{o}s--Straus equation is
+\begin{equation}\label{eq:es}
+ \frac4p=\frac1x+\frac1y+\frac1z,
+ \qquad x,y,z\in\mathbb Z_{>0}.
+\end{equation}
+We take $p\equiv1\pmod4$ prime and prescribe initial positions
+$x=(p+a)/4$ with $a=3+4j$. Solutions are counted without regard to the
+order of their denominators. Write $\FI(p,x)$, respectively
+$\FII(p,x)$, for the number of solutions with strictly smallest
+denominator $x$ and precisely one, respectively two, denominators
+divisible by $p$. All logarithms are natural, and $\tau(n)$ denotes the
+number of positive divisors of $n$.
+
+For $3\le a<p$, $a\equiv3\pmod4$, we have
+\[
+ (a,p)=(a,x)=1,\qquad x<p/2,\qquad p\nmid x.
+\]
+Reduction of the cleared equation modulo $p$ shows that any solution
+at this $x$ has at least one of its other denominators divisible by $p$.
+Thus the two types exhaust the complete local count at this position.
+
+\begin{theorem}[Complete local counts]\label{thm:main}
+Set
+\[
+\begin{gathered}
+ \delta=2^{-20},\qquad \kappa=\frac{\log3}{8}-\delta>0,\\
+ J(p)=\left\lfloor\frac{(\log p)^\delta+1}{4}\right\rfloor,
+ \qquad a_j=3+4j,\quad x_j=(p+a_j)/4.
+\end{gathered}
+\]
+There is a set $\mathcal E$ of primes $p\equiv1\pmod4$ such that
+\begin{equation}\label{eq:global-exception}
+ \#\{p\le X:p\in\mathcal E\}\ll\frac{X}{(\log X)^{1+\delta}}
+ \qquad(X\to\infty),
+\end{equation}
+and, for sufficiently large $p\notin\mathcal E$, simultaneously at
+all positions $0\le j<J(p)$,
+\begin{align}
+ \FI(p,x_j)
+ &=\frac{\tau(x_j^2)}{\varphi(a_j)}
+       \left(1+O((\log p)^{-\kappa})\right),\label{eq:main-I}\\
+ \FII(p,x_j)
+ &=\frac{\tau(x_j^2)}{2\varphi(a_j)}
+       \left(1+O((\log p)^{-\kappa})\right).\label{eq:main-II}
+\end{align}
+The error constants are uniform in $j$. In particular,
+\begin{equation}\label{eq:ratio-total}
+\begin{aligned}
+ \frac{\FI(p,x_j)}{\FII(p,x_j)}
+ &=2+O((\log p)^{-\kappa}),\\
+ \FI(p,x_j)+\FII(p,x_j)
+ &=\frac{3\tau(x_j^2)}{2\varphi(a_j)}
+       \left(1+O((\log p)^{-\kappa})\right).
+\end{aligned}
+\end{equation}
+Solutions at different positions $j$ are distinct.
+\end{theorem}
+
+\begin{corollary}[Quantitative multiplicity]\label{cor:many}
+Fix $0<\theta<15/16$ and put $\gamma_\theta=\theta\log3$.
+There is an exceptional set $\mathcal E_\theta\supseteq\mathcal E$ with
+\[
+ \#\{p\le X:p\in\mathcal E_\theta\}
+ \ll_\theta X/(\log X)^{1+\delta}
+\]
+such that, for sufficiently large $p\notin\mathcal E_\theta$, all
+positions $0\le j<J(p)$ satisfy Theorem~\ref{thm:main} and
+\begin{equation}\label{eq:many}
+ \FI(p,x_j)\ge\frac{(\log p)^{\gamma_\theta}}{4\varphi(a_j)},
+ \qquad
+ \FII(p,x_j)\ge\frac{(\log p)^{\gamma_\theta}}{8\varphi(a_j)}.
+\end{equation}
+In particular, one may take
+$\gamma_*=\gamma_{7/8}=7\log3/8=0.96128575\ldots$.
+\end{corollary}
+The enlarged exceptional set comes from one additional total-factor
+statistic per shift. Its order is unchanged, but it need not be the
+same set point by point. The range $\theta<15/16$ is sufficient for the
+chosen proof parameters; no endpoint or optimality assertion is made.
+
+\begin{corollary}[Fixed initial catalogue]\label{cor:fixed}
+For each fixed integer $J_0\ge1$, the local asymptotics
+\eqref{eq:main-I}--\eqref{eq:main-II} hold simultaneously for
+$0\le j<J_0$ outside an exceptional set of
+$O_{J_0}(X/(\log X)^{1+\delta})$ primes $p\le X$, $p\equiv1\pmod4$.
+For each additional fixed $0<\theta<15/16$, the bounds \eqref{eq:many}
+hold for these positions outside a possibly enlarged exceptional set
+of size $O_{J_0,\theta}(X/(\log X)^{1+\delta})$.
+\end{corollary}
+
+The constants are deliberately unoptimized. The catalogue becomes
+nonempty precisely when
+\begin{equation}\label{eq:nonempty}
+ J(p)\ge1\quad\Longleftrightarrow\quad p\ge\exp(3^{2^{20}}).
+\end{equation}
+The results are unconditional and asymptotic, with a further
+ineffective onset inherited from Siegel--Walfisz. The exceptional set
+is defined by sufficient factor-distribution tests. The theorem leaves
+the individual exceptional primes untreated and gives no complexity
+bound for constructing the decompositions.
+
+\subsection{Earlier results and the quantitative application}
+Bradford's Propositions~1--4 \cite{Bradford} give complete
+fixed-denominator divisor criteria for both types. We use these
+criteria in a normalized form and include their inverse maps to fix
+the counting conventions. Elsholtz and Tao
+\cite[Theorem~1.8 and Section~6]{ET} already obtain many solutions at
+the first position $x=(p+3)/4$ for a relative-density-one set of
+primes. Their fixed-shift additive-function theorem
+\cite[Appendix, Lemma~A.3]{ET}, together with the complete divisor
+criteria and character orthogonality, also gives complete local
+asymptotics on any fixed finite catalogue. It yields multiplicity
+exponents arbitrarily close to $\log3$ on such a catalogue.
+Appendix~\ref{app:fixed} records this deduction explicitly.
+
+Hall's work on the divisors of $p-1$ \cite{Hall} and the per-class
+divisor estimates in the proof of Bettin et al., Lemma~4.9
+\cite{Bettin}, provide further fixed-shift precedents. The latter
+also give a one-sided Type~II lower bound of exponent
+$\log2-\eps$ on every fixed finite catalogue; the substitution is
+given in Appendix~\ref{app:fixed}. A diagonal choice from fixed-catalogue
+results allows some unspecified slowly growing catalogue. Thus the
+quantitative content considered here is the prescribed logarithmic-power
+length, a uniform relative error for both complete counts, and one
+common exceptional-set estimate.
+
+Other nearby results concern different counting questions.
+Elsholtz and Planitzer \cite{EP} obtain lower bounds for total solution
+counts on density-one sets of integers and on infinite sets of primes.
+Pomerance and Weingartner \cite{PW} bound exceptional sets for
+existence of a decomposition with a varying numerator. Dahan
+\cite[Section~4.3]{Dahan} allows a growing search depth in a Type~II
+witness family. Complete parametrizations are also studied in
+Bello--Hern\'andez, Benito, and Fern\'andez \cite{Bello}, while
+Chamberland \cite{Chamberland} gives a Type~II prime-representation
+criterion. These conclusions concern total counts, existence, or
+search depth; the present theorems count each prescribed position.
+
+Our proof uses standard distribution results for primes. A direct
+moment expansion groups terms by distinct squarefree supports.
+The normalized coefficient of each support is polylogarithmic,
+and its progression modulus is at most $4N^{1/4}$, so ordinary
+Bombieri--Vinogradov controls the accumulated error.
+Alternatively, Elliott's established Bernoulli model, in the form
+recalled by Gorodetsky \cite[Theorem~1.1]{Gorodetsky}, gives the same
+transfer after a uniform remainder calculation;
+Appendix~\ref{app:elliott} supplies that calculation. Ford's
+Poisson model for fixed shifts \cite{Ford} is another relevant
+distributional framework. The application here combines these
+analytic inputs with complete prime-power divisor boxes and the
+exact Type~I/Type~II multiplicities.
+
+\section{Complete local counts and character mixing}\label{sec:dictionary}
+\subsection{The square-divisor dictionary}
+For this subsection, assume $p\equiv1\pmod4$ is prime,
+$a\equiv3\pmod4$, $3\le a<p$, and $x=(p+a)/4$.
+In particular $(a,x)=(a,p)=1$ and $x<p/2$.
+
+For $b\in(\mathbb Z/a\mathbb Z)^\times$, define
+\begin{equation}\label{eq:C}
+ C_{a,x}(b)=\#\{d\mid x^2:d\,x^{-1}\equiv b\pmod a\},
+ \qquad M(x)=\tau(x^2).
+\end{equation}
+The inverse in \eqref{eq:C} is taken modulo $a$.
+
+\begin{lemma}[Divisors and primitive ratios]\label{lem:dictionary}
+The divisors $d\mid x^2$ correspond bijectively to ordered pairs
+$(u,v)$ with $(u,v)=1$ and $uv\mid x$. The correspondence is
+\[
+ g=(d,x),\quad u=d/g,\quad v=x/g,\quad D=g^2/d,
+ \qquad x=Duv,\quad d=Du^2.
+\]
+In particular, $D$ is a positive integer and $d/x=u/v$.
+If $x=\prod_{q\mid x}q^{e_q}$ and
+$d=\prod_{q\mid x}q^{j_q}$, the ratio exponent at $q$ is
+$j_q-e_q\in\{-e_q,\ldots,e_q\}$.
+\end{lemma}
+\begin{proof}
+At each prime, the exponents of $u,v,D$ are respectively
+$\max(j_q-e_q,0)$, $\max(e_q-j_q,0)$, and
+$2\min(j_q,e_q)-j_q$. The last is nonnegative because
+$0\le j_q\le2e_q$. These formulas give all the claimed identities.
+Conversely, a coprime pair with $uv\mid x$ determines $D=x/(uv)$ and
+$d=Du^2$, which divides $x^2$ and reverses the construction.
+\end{proof}
+
+\begin{proposition}[Exact counts]\label{prop:exact}
+In the stated range,
+\begin{equation}\label{eq:exact}
+ \FI(p,x)=C_{a,x}(-p^{-1}),\qquad
+ \FII(p,x)=\frac12 C_{a,x}(-1).
+\end{equation}
+Both identities count all solutions with strictly smallest denominator $x$.
+\end{proposition}
+\begin{proof}
+For Type~I, the condition $d x^{-1}\equiv-p^{-1}\pmod a$ is equivalent
+to $pd+x\equiv0\pmod a$, or to $4d+1\equiv0\pmod a$.
+Since $dd'=x^2$ for $d'=x^2/d$, it also implies
+$d'+px\equiv0\pmod a$. Set
+\begin{equation}\label{eq:typeIdiv}
+ y=\frac{px+x^2/d}{a},\qquad z=\frac{p(x+pd)}{a}.
+\end{equation}
+Equivalently, with Lemma~\ref{lem:dictionary},
+\begin{equation}\label{eq:typeIpair}
+ c_1=\frac{pu+v}{a},\qquad
+ (x,y,z)=(Duv,Dv c_1,pDu c_1).
+\end{equation}
+Indeed,
+\[
+ \frac1y+\frac1z=\frac{pu+v}{pDuvc_1}=\frac a{px},
+ \qquad \frac1x+\frac a{px}=\frac4p.
+\]
+Moreover $p\nmid Duv$ and
+$ac_1\equiv v\not\equiv0\pmod p$, so only $z$ is divisible by $p$.
+We have
+\[
+ \frac yx=\frac{pu+v}{au}>\frac pa>1,\qquad
+ \frac zy=\frac{pu}{v}\ge\frac p x>2.
+\]
+Thus $x<y<z$. The ordered pair $(u,v)$ is recovered as the reduced ratio
+$z/(py)$, or $d$ is recovered from $d=(az/p-x)/p$.
+There is no division by two.
+
+For completeness, take any Type~I solution and name the non-$p$ second
+denominator $y$ and the $p$-divisible one $pV$.
+The reciprocal identity is
+$a y V=pxV+xy$. It implies $aV-x>0$ and, after reduction modulo $p$,
+$p\mid aV-x$. Write $aV-x=pd$ with $d>0$. Substitution gives
+\[
+ (ay-px)d=x^2.
+\]
+Hence $d\mid x^2$, $pd+x\equiv0\pmod a$, and the solution is
+\eqref{eq:typeIdiv}. The inequalities already proved also show that its
+$p$-divisible denominator is the larger one.
+
+For Type~II write the two other denominators as $pY,pZ$. Then
+\[
+ \frac ax=\frac1Y+\frac1Z,\qquad
+ (aY-x)(aZ-x)=x^2.
+\]
+Both factors $aY-x$ and $aZ-x$ are positive by the reciprocal
+identity. This gives all divisors $d\mid x^2$ with $d+x\equiv0\pmod a$, by
+\begin{equation}\label{eq:typeIIdiv}
+ \{y,z\}=
+ \left\{\frac{p(x+d)}a,\frac{p(x+x^2/d)}a\right\}.
+\end{equation}
+The two denominators are positive multiples of $p$, so they exceed
+$x<p/2$. Swapping them sends $d$ to $x^2/d$. A fixed point would be
+$d=x$, which would require $a\mid2x$, impossible because $(a,x)=1$
+and $a\ge3$ is odd. The fibers therefore have size exactly two.
+In primitive variables this is the familiar recovery
+$h=(u+v)/a$ and $\{y,z\}=\{pDvh,pDuh\}$.
+\end{proof}
+
+These criteria are equivalent to established fixed-$x$ divisor
+parametrizations; compare Bradford~\cite[Propositions~1--4]{Bradford}.
+For his Type~I convention the divisor is $x^2/d$ in our notation.
+
+
+\subsection{Mixing in the complete prime-power box}
+\begin{lemma}[Full divisor-box mixing]\label{lem:box}
+Let $a,x$ be positive integers with $(a,x)=1$, and let $m\ge0$.
+Suppose that for every nonprincipal character
+$\chi\bmod a$, at least $m$ distinct prime divisors $q\mid x$ satisfy
+$\Re\chi(q)\le0$. Then, for every unit class $b\bmod a$,
+\begin{equation}\label{eq:box}
+ \left|\frac{\varphi(a)C_{a,x}(b)}{\tau(x^2)}-1\right|
+ \le(\varphi(a)-1)3^{-m}.
+\end{equation}
+The counted prime divisors may be drawn from any chosen subwindow.
+All additional primes and prime powers are included in $C_{a,x}$.
+\end{lemma}
+\begin{proof}
+For $|z|=1$ and $e\ge1$ let
+\[
+ A_e(z)=\frac1{2e+1}\sum_{j=-e}^e z^j.
+\]
+Always $|A_e(z)|\le1$. If $\Re z\le0$, then for $e=1$,
+$|A_1(z)|=|1+2\Re z|/3\le1/3$.
+For $e\ge2$, write $z=e^{it}$. Since
+$|\sin(t/2)|\ge1/\sqrt2$, the finite geometric sum gives
+\[
+ |A_e(z)|
+ =\frac{|\sin((2e+1)t/2)|}{(2e+1)|\sin(t/2)|}
+ \le\frac{\sqrt2}{2e+1}\le\frac{\sqrt2}{5}<\frac13.
+\]
+Using $x=\prod q^{e_q}$, character orthogonality and the ratio exponents
+from Lemma~\ref{lem:dictionary} give
+\[
+ \frac{\varphi(a)C_{a,x}(b)}{\tau(x^2)}
+ =\sum_{\chi\bmod a}\overline{\chi(b)}
+              \prod_{q\mid x}A_{e_q}(\chi(q)).
+\]
+The principal term is $1$. Every nonprincipal term has absolute value
+at most $3^{-m}$, by the hypothesis and the preceding factor bounds.
+Summing proves \eqref{eq:box}.
+\end{proof}
+
+\begin{remark}
+A prime power $q^e$ contributes $2e+1$ possible ratio exponents.
+The normalized block $A_e$ accounts for all of them; replacing it by
+$e$ independent ternary choices would instead count $3^e$ assignments.
+\end{remark}
+
+\section{A common good set for the growing catalogue}\label{sec:good}
+\subsection{Parameters and sector tests}
+For sufficiently large $N$, put
+\begin{equation}\label{eq:parameters}
+\begin{gathered}
+ L=\log\log N,\qquad c=2^{-14},\qquad r=\lfloor cL\rfloor,\qquad k=2r,\\
+ Q=\exp((\log N)^{1/4}),\qquad Z=N^{1/(8r)},\\
+ \cP_N=\{N<p\le2N:p\text{ prime},\ p\equiv1\pmod4\},\\
+ \cA_N=\{3\le a\le2(\log N)^\delta:a\equiv3\pmod4\}.
+\end{gathered}
+\end{equation}
+For $p\in\cP_N$, $a\in\cA_N$, and nonprincipal $\chi\bmod a$, let
+\[
+ x_a=\frac{p+a}{4},\quad
+ \cQ_a(p)=\{Q<q\le Z:q\text{ prime},\ q\mid x_a\},\quad
+ K_a(p)=|\cQ_a(p)|,
+\]
+\[
+ Z_{a,\chi}(p)=\#\{q\in\cQ_a(p):\operatorname{Re}\chi(q)\le0\}.
+\]
+Define the sufficient-test bad set
+\begin{equation}\label{eq:badset}
+ \cB_N=
+ \bigcup_{a\in\cA_N}\{p\in\cP_N:K_a(p)<L/2\}
+ \ \cup\!
+ \bigcup_{\substack{a\in\cA_N\\\chi\ne\chi_0\ (a)}}
+ \{p\in\cP_N:Z_{a,\chi}(p)<L/8\}.
+\end{equation}
+The complement of $\cB_N$ will be the common good set.
+
+\begin{lemma}[Size of a character sector]\label{lem:sector}
+Let $G$ be a finite abelian group and $\chi$ a nonprincipal character.
+Then
+\[
+ S_\chi=\{g\in G:\Re\chi(g)\le0\},\qquad |S_\chi|\ge|G|/3.
+\]
+\end{lemma}
+\begin{proof}
+The image of $\chi$ consists of the $d$th roots of unity for some
+$d\ge2$, each with equally many preimages. The number of roots in the
+closed left half-plane is
+\[
+ \lfloor3d/4\rfloor-\lceil d/4\rceil+1.
+\]
+For $d\ge6$ this is at least $d/2-1\ge d/3$; for $d=2,3,4,5$ the
+counts are $1,2,3,2$, respectively.
+\end{proof}
+
+\subsection{Distribution inputs and exact comparison means}
+In the arithmetic sums in this section and their subsequent moment
+application, the index $q$ always ranges over primes.
+We record the precise standard distribution inputs. The
+Siegel--Walfisz theorem implies, for every fixed $H>0$,
+\begin{equation}\label{eq:sw}
+ \pi(t;a,b)=\frac{\Li(t)}{\varphi(a)}
+                +O_H\left(\frac{t}{(\log t)^H}\right)
+ \quad ((a,b)=1,\ a\le\log t).
+\end{equation}
+Here a fixed Siegel--Walfisz modulus-range parameter $B=2$ suffices
+in partial summation; its exponential error absorbs every fixed power
+$(\log t)^{-H}$. The implied constant and onset may depend on $H$.
+We also use the following consequence of the ordinary
+Bombieri--Vinogradov theorem: for every fixed $A>0$,
+\begin{equation}\label{eq:bv}
+ \sum_{m\le4N^{1/4}}\max_{(v,m)=1}
+ \left|\pi(2N;m,v)-\pi(N;m,v)
+ -\frac{\Li(2N)-\Li(N)}{\varphi(m)}\right|
+ \ll_A\frac{N}{(\log N)^A}.
+\end{equation}
+These forms follow from the character version of Siegel--Walfisz on
+p.~2 and the two-term Bombieri--Vinogradov bound on p.~3 of
+Vaughan's account \cite{VaughanBV}. Appendix~\ref{app:inputs} gives the
+precise partial-summation steps and parameter substitutions.
+
+
+For sufficiently large $N$, the parameters satisfy
+\begin{equation}\label{eq:range}
+ 2(\log N)^\delta<Q<Z<N<p\quad(p\in\cP_N).
+\end{equation}
+Indeed, $Q<Z$ reduces to $8r<(\log N)^{3/4}$. Also $(a,x_a)=1$,
+because a common divisor would divide $p$, while $a<p$.
+All window primes are thus units modulo $a$ and exceed $a$.
+
+For each unit class $b\pmod a$, put
+\[
+ \lambda_b=\sum_{\substack{Q<q\le Z\\q\equiv b\ (a)}}\frac1{q-1}.
+\]
+Partial summation in \eqref{eq:sw}, with $H=9$, gives uniformly in
+$a\in\cA_N$ and $b$,
+\begin{equation}\label{eq:lambda}
+ \lambda_b=\frac{\log\log Z-\log\log Q}{\varphi(a)}
+ +O((\log Q)^{-8})+O(Q^{-1}).
+\end{equation}
+To justify the uniformity, $a\le\log t$ holds eventually for all $t\ge Q$.
+Replacing $1/q$ by $1/(q-1)$ costs $O(Q^{-1})$. The boundary and integral
+errors in partial summation are bounded by a constant times
+$(\log Q)^{-8}$. For a fixed $(a,\chi)$, the sector mean sums
+$\lambda_b$ over $b\in S_\chi$; the total mean sums over all unit classes.
+Thus their errors are at most
+\[
+ O\!\left(\varphi(a)((\log Q)^{-8}+Q^{-1})\right)
+ =O\!\left((\log N)^{\delta-2}+(\log N)^\delta/Q\right)=o(1),
+\]
+uniformly in $a,\chi$. This is a sum within one statistic, distinct from
+the later union over different moduli and characters.
+
+For a nonprincipal character $\chi\pmod a$, define actual statistics
+\begin{equation}\label{eq:statistics}
+ I_q(p)=\one_{q\mid p+a},\qquad
+ Z_{a,\chi}(p)=\sum_{\substack{Q<q\le Z\\q\bmod a\in S_\chi}}I_q(p),
+ \qquad K_a(p)=\sum_{Q<q\le Z}I_q(p).
+\end{equation}
+The congruence $q\mid p+a$ is equivalent to $q\mid x_a$.
+The exact comparison means are sums of $w_q=1/(q-1)$ over the respective
+sets of primes, denoted $\mu_{a,\chi}$ and $\mu_{a,\mathrm{all}}$.
+They are never replaced by asymptotic expressions inside a high moment.
+
+The difference of logarithms in \eqref{eq:lambda} is
+\begin{equation}\label{eq:log-window}
+ \log\log Z-\log\log Q=\frac34L-\log(8r).
+\end{equation}
+The second term is not bounded as $N$ grows, but it is $o(L)$.
+Writing $\sigma_\chi=|S_\chi|/\varphi(a)\ge1/3$, we obtain
+\[
+ \mu_{a,\chi}=\sigma_\chi\left(\frac34L-\log(8r)\right)+o(1),
+ \qquad
+ \mu_{a,\mathrm{all}}=\frac34L-\log(8r)+o(1).
+\]
+Consequently, for all sufficiently large $N$, uniformly in the parameters,
+\begin{equation}\label{eq:mean-bounds}
+ \frac{3L}{16}\le\mu_{a,\chi}\le L,
+ \qquad \frac{5L}{8}\le\mu_{a,\mathrm{all}}\le L.
+\end{equation}
+Thus either $Z_{a,\chi}(p)<L/8$ or $K_a(p)<L/2$ forces deviation
+from its own exact mean by at least $t_0=L/16$.
+
+\subsection{A moment bound with explicit order dependence}
+\begin{lemma}\label{lem:moment}
+Let $B_i$ be finitely many independent Bernoulli variables of means
+$w_i$, and put $Y=\sum_i(B_i-w_i)$ and $\mu=\sum_iw_i$.
+For every integer $r\ge1$,
+\begin{equation}\label{eq:moment}
+ \E|Y|^{2r}\le2(4\mu)^r r!+2\,4^{2r}(2r)!
+             \le2(4\mu r)^r+2(8r)^{2r}.
+\end{equation}
+\end{lemma}
+\begin{proof}
+For $|s|\le1$, independence and $\log(1+u)\le u$ yield
+\[
+ \log\E e^{sY}\le\mu(e^s-1-s)\le\mu s^2.
+\]
+When $\mu=0$ the claim is immediate. Otherwise use exponential Markov
+on each tail, choosing $|s|=\min(t/(2\mu),1/2)$. This gives
+\[
+ \Prob(|Y|\ge t)\le2\exp\left\{-\min\left(\frac{t^2}{4\mu},
+                                                   \frac t4\right)\right\}.
+\]
+Insert the bound into $2r\int_0^\infty t^{2r-1}\Prob(|Y|\ge t)\,dt$
+and use $e^{-\min(u,v)}\le e^{-u}+e^{-v}$. The Gaussian and exponential
+integrals give respectively $2(4\mu)^r r!$ and $2\,4^{2r}(2r)!$.
+Finally $r!\le r^r$ and $(2r)!\le(2r)^{2r}$.
+\end{proof}
+For $\mu\le L$, $r\le cL$ and $t_0=L/16$, this implies
+\begin{align}
+ \frac{\E|Y|^{2r}}{t_0^{2r}}
+ &\le2(1024r/L)^r+2(128r/L)^{2r}\notag\\
+ &\le4\,2^{-4r}
+ \le4(\log N)^{-2c\log2},\label{eq:normalized-moment}
+\end{align}
+where the last inequality uses $r\ge cL/2$, valid once $cL\ge2$.
+Every constant in this estimate is independent of the growing order $r$.
+
+\subsection{The coefficient of a distinct support}
+\begin{lemma}\label{lem:compression}
+Let $\mathcal Q$ be any finite set, $I_q\in\{0,1\}$,
+$T=\sum_{q\in\mathcal Q}I_q$, and let $k$ be a nonnegative integer.
+Zero powers are interpreted as $1$, including at zero, as polynomial
+identities; thus the case $k=0$ is included.
+The multilinear expansion of $(T-\mu)^k$ is
+\begin{equation}\label{eq:multilinear}
+ (T-\mu)^k=\sum_{\substack{S\subseteq\mathcal Q\\|S|\le k}}
+                  \alpha_S\prod_{q\in S}I_q,
+\end{equation}
+where, for $s=|S|$,
+\begin{equation}\label{eq:alpha}
+ \alpha_S=\sum_{j=s}^k\binom{k}{j}(-\mu)^{k-j}s!
+                      \left\{\begin{matrix}j\\s\end{matrix}\right\}.
+\end{equation}
+For $\mu\ge0$, $|\alpha_S|\le(\mu+s)^k$. The empty-support
+coefficient is $(-\mu)^k$.
+\end{lemma}
+\begin{proof}
+Expand the power and use $I_q^j=I_q$ for $j\ge1$. In a product of
+$j$ indicators, using exactly the prescribed $s$ indices is counted by
+the number of surjections onto those indices, namely
+$s!\left\{\begin{smallmatrix}j\\s\end{smallmatrix}\right\}$.
+This proves \eqref{eq:alpha}. That number is at most $s^j$; applying the
+binomial theorem to the absolute values gives the asserted bound.
+For $s=0$, only the term $j=0$ remains, with the usual convention
+$\left\{\begin{smallmatrix}0\\0\end{smallmatrix}\right\}=1$.
+\end{proof}
+For our parameters $k=2r$, $s\le2r$, and $\mu\le L$, normalization
+before estimating gives the uniform bound
+\begin{equation}\label{eq:coefficient-budget}
+ \frac{|\alpha_S|}{t_0^{2r}}
+ \le[16(1+2c)]^{2r}\le32^{2r}
+ \le(\log N)^{\beta},\qquad \beta=10c\log2<1.
+\end{equation}
+It is this bound per distinct support, rather than a bound on the
+number of ordered tuples, that permits use of ordinary
+Bombieri--Vinogradov with $r$ growing.
+
+\subsection{Transfer by distinct supports}
+Fix $a\in\cA_N$ and a set $\mathcal Q$ of primes with
+$a<q\le Z$, all odd. Write $T(p)=\sum_{q\in\mathcal Q}I_q(p)$
+and assume that its exact comparison mean is at most $L$.
+This includes the statistics in \eqref{eq:statistics}.
+In the comparison model,
+let $B_q$ be independent with mean $1/(q-1)$, let $T^*=\sum B_q$,
+and let $\mu$ be the exact sum of their means. For each support $S$
+in Lemma~\ref{lem:compression}, put $d(S)=\prod_{q\in S}q$.
+The simultaneous divisibility event for actual $p\in\cP_N$ is exactly
+\[
+ p\equiv1\pmod4,\qquad p\equiv-a\pmod{d(S)}.
+\]
+Since the primes $q$ exceed $a$, this is one reduced class modulo
+$4d(S)$. Write $P_0=(\Li(2N)-\Li(N))/2$. Then
+\begin{equation}\label{eq:joint-count}
+ \sum_{p\in\cP_N}\prod_{q\in S}I_q(p)
+       =\frac{P_0}{\varphi(d(S))}+R_a(d(S)).
+\end{equation}
+The model joint expectation is exactly $1/\varphi(d(S))$.
+For the empty support, $d(S)=1$ and the remainder is
+$|\cP_N|-P_0$; it is included in this formula.
+
+Unique prime factorization ensures that distinct supports give distinct
+$d(S)$. Every such support has at most $2r$ primes, so
+\begin{equation}\label{eq:modulus-budget}
+ 4d(S)\le4Z^{2r}=4N^{1/4}.
+\end{equation}
+Using \eqref{eq:bv} with $A=5$, the sum of absolute remainders over
+these supports is $O(N/(\log N)^5)$. In particular, it is not necessary
+to multiply this bound by the number of supports.
+Equations \eqref{eq:multilinear}--\eqref{eq:joint-count} and
+\eqref{eq:coefficient-budget} yield
+\begin{equation}\label{eq:transfer}
+ \frac1{t_0^{2r}}\sum_{p\in\cP_N}(T(p)-\mu)^{2r}
+ =P_0\frac{\E(T^*-\mu)^{2r}}{t_0^{2r}}
+       +O\bigl(N(\log N)^{-5+\beta}\bigr).
+\end{equation}
+The signed expansion is used only to establish the equality and its
+error bound; the actual even moment on the left is nonnegative.
+
+By Markov's inequality and \eqref{eq:normalized-moment},
+any event forcing $|T(p)-\mu|\ge t_0$ occurs for at most
+\begin{equation}\label{eq:one-bad}
+ 4P_0\,2^{-4r}+O\bigl(N(\log N)^{-5+\beta}\bigr)
+\end{equation}
+primes. In particular, this applies to each failed threshold in
+\eqref{eq:badset}, by \eqref{eq:mean-bounds}.
+
+\begin{proposition}[Common exceptional-set estimate]\label{prop:commonbad}
+For the parameters in \eqref{eq:parameters},
+\[
+ |\cB_N|\ll|\cP_N|(\log N)^{-\delta}.
+\]
+\end{proposition}
+\begin{proof}
+For each $a$ we have $\varphi(a)-1$ sector statistics and one total
+factor statistic. The sufficient-test bad set is $\cB_N$ from \eqref{eq:badset}.
+Its constituent events need not be disjoint; we only use a union bound.
+The number of statistics over all $a\in\cA_N$ is at most
+\begin{equation}\label{eq:union-budget}
+ \sum_{a\le2(\log N)^\delta}\varphi(a)\ll(\log N)^{2\delta}.
+\end{equation}
+A union bound in \eqref{eq:one-bad}, using
+$P_0\asymp|\cP_N|\asymp N/\log N$, shows that the proportion of
+bad primes is
+\begin{equation}\label{eq:bad-rate}
+ O\left((\log N)^{2\delta-2c\log2}
+        +(\log N)^{-4+\beta+2\delta}\right)
+       =O((\log N)^{-\delta}).
+\end{equation}
+For the equality, note $c=64\delta$, so
+$2c\log2>3\delta$ and $4-\beta>3\delta$.
+
+\end{proof}
+
+\section{Proofs of the main results}
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+For $p\in\cP_N\setminus\cB_N$, every nonprincipal character modulo
+every $a\in\cA_N$ has at least $L/8$ distinct prime divisors of $x_a$
+in its sector. Lemma~\ref{lem:box} therefore gives, for every unit class,
+\begin{equation}\label{eq:full-relative}
+ \left|\frac{\varphi(a)C_{a,x_a}(b)}{\tau(x_a^2)}-1\right|
+ \le(\varphi(a)-1)3^{-L/8}
+ \le2(\log N)^{\delta-\log3/8}
+ =2(\log N)^{-\kappa}.
+\end{equation}
+All additional prime factors and their powers are already included in
+$C_{a,x_a}$; no information about them beyond Lemma~\ref{lem:box} is
+needed. Proposition~\ref{prop:exact}, at $b=-p^{-1}$ and $b=-1$,
+now gives the two complete local counts. The first target depends on
+$p$, which is harmless because \eqref{eq:full-relative} holds for all
+unit classes for each individual good prime.
+
+For sufficiently large $N$ and $N<p\le2N$,
+$(\log p)^\delta\le2(\log N)^\delta$. The prescribed shifts
+$a_j=3+4j$, $0\le j<J(p)$, are exactly those satisfying
+$3\le a_j\le(\log p)^\delta$, so they belong to $\cA_N$.
+Also $\log p\asymp\log N$, and hence the relative errors are
+$O((\log p)^{-\kappa})$, uniformly in $j$.
+They are eventually less than $1/2$, so the counts in the ratio are
+positive. Taking their ratio and their sum gives
+\eqref{eq:ratio-total}. Strict minimality distinguishes solutions at
+different positions.
+
+Choose a fixed sufficiently large dyadic starting point and let
+$\mathcal E$ be the union of the sets $\cB_N$ for disjoint dyadic
+intervals above it, together with the finite initial range of primes.
+This is a fixed sufficient exceptional set. To estimate its counting
+function up to $X$, discard primes at most $\sqrt X$; their number is
+negligible compared with $X/(\log X)^{1+\delta}$. For the remaining
+dyadic intervals $N\gg\sqrt X$, the logs are uniformly comparable to
+$\log X$. Proposition~\ref{prop:commonbad} and the prime number theorem give
+\[
+ \sum_N|\cB_N|\ll(\log X)^{-\delta}
+                      \sum_N|\cP_N|
+ \ll X/(\log X)^{1+\delta}.
+\]
+A possible final partial interval is bounded by its full dyadic
+interval. This proves \eqref{eq:global-exception}.
+
+\end{proof}
+
+\subsection{A broader total-factor window}
+Keep the sector window unchanged, and also put
+\begin{equation}\label{eq:wide-definition}
+ W=2(\log N)^\delta,\qquad
+ \widetilde K_a(p)=\sum_{W<q\le Z}I_q(p),\qquad
+ \widetilde\mu=\sum_{W<q\le Z}\frac1{q-1}.
+\end{equation}
+Every prime in this wider window exceeds every $a\in\cA_N$.
+Its exact comparison mean does not depend on $a$.
+The case $a=1$ of \eqref{eq:sw}, followed by partial summation, gives
+\[
+ \sum_{W<q\le Z}\frac1{q-1}
+ =\int_W^Z\frac{dt}{t\log t}
+       +O((\log W)^{-2}+W^{-1}).
+\]
+For example, $H=3$ suffices for the integrated prime-counting error;
+replacing $1/q$ by $1/(q-1)$ costs $O(W^{-1})$.
+Since $W\to\infty$, this proves
+\begin{equation}\label{eq:wide-mean}
+ \widetilde\mu
+ =L-\log(8r)-\log(\log2+\delta L)+o(1)
+ =L-O(\log L).
+\end{equation}
+In particular, $\widetilde\mu\le L$ eventually. For every fixed
+$0<\theta<15/16$ it is eventually at least $(\theta+1/16)L$.
+Thus $\widetilde K_a(p)<\theta L$ forces a deviation of at least
+$t_0=L/16$ from its own exact mean. The lower endpoint requires only the ordinary prime number theorem.
+
+\begin{proposition}[An enlarged sufficient-test bad set]\label{prop:wide}
+Fix $0<\theta<15/16$ and define
+\begin{equation}\label{eq:wide-badset}
+ \cB_N^*=\cB_N\cup
+ \bigcup_{a\in\cA_N}
+       \{p\in\cP_N:\widetilde K_a(p)<\theta L\}.
+\end{equation}
+Then, for sufficiently large $N$ depending on $\theta$,
+\[
+ |\cB_N^*|\ll_\theta |\cP_N|(\log N)^{-\delta}.
+\]
+\end{proposition}
+\begin{proof}
+Equation~\eqref{eq:wide-mean} gives $\widetilde\mu\le L$ and the
+required deviation $L/16$. Thus the normalized model moment is at most
+$4\,2^{-4r}$ by \eqref{eq:normalized-moment}. Every distinct support
+still has normalized coefficient at most $(\log N)^\beta$ by
+\eqref{eq:coefficient-budget}, and its modulus is at most
+$4Z^{2r}=4N^{1/4}$ by \eqref{eq:modulus-budget}. The lower endpoint has
+changed, but all support primes exceed $a$ and are odd. Consequently
+the same reduced-class count and the same unweighted BV remainder sum
+apply. Formula~\eqref{eq:one-bad} bounds the number of added failures
+for each $a$.
+
+There are $|\cA_N|\ll(\log N)^\delta$ new statistics, compared with
+the $O((\log N)^{2\delta})$ original statistics. The enlarged union
+therefore still has bad proportion
+\[
+ O\!\left((\log N)^{2\delta-2c\log2}
+          +(\log N)^{-4+\beta+2\delta}\right)
+ =O((\log N)^{-\delta}).
+\]
+Here $c=64\delta$, $2c\log2>3\delta$, and $4-\beta>3\delta$.
+The necessary onset, and the constant after absorbing an initial
+range, may depend on the fixed $\theta$.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:many}]
+On $\cP_N\setminus\cB_N^*$ there are at least $\theta L$ distinct
+prime factors of $x_a$ in the wider window. Each contributes at least
+$3$ to $\tau(x_a^2)$, so
+\[
+ \tau(x_a^2)\ge3^{\widetilde K_a(p)}
+                 \ge(\log N)^{\theta\log3}.
+\]
+The relative error in \eqref{eq:full-relative} is eventually at most
+$1/2$. The exact counts then give dyadic lower bounds with denominators
+$2\varphi(a)$ for Type~I and $4\varphi(a)$ for Type~II.
+For fixed $\theta$, converting $\log N$ to $\log p$ costs at most
+another factor two for sufficiently large $N$. This proves
+\eqref{eq:many} on the enlarged good set. Define $\mathcal E_\theta$
+from the dyadic $\cB_N^*$ and a sufficiently large finite initial range,
+including $\mathcal E$. The same dyadic summation as above proves the
+claimed counting bound. The original asymptotics remain valid because
+the enlarged bad set contains the original one.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:fixed}]
+For fixed $J_0$, the prescribed positions are included once
+\[
+ p\ge P_{J_0}:=\exp((4J_0-1)^{1/\delta}),
+\]
+since this is exactly the condition $J(p)\ge J_0$.
+Theorem~\ref{thm:main}, respectively Corollary~\ref{cor:many}, applies
+above this threshold. The finitely many smaller primes are absorbed
+in the constants, which are allowed to depend on $J_0$ and, for the
+multiplicity assertion, on $\theta$. No effective starting point is
+obtained by this deduction.
+\end{proof}
+
+\section{Arithmetic interpretation and parameters}
+\subsection{Quadratic reciprocity}
+The following observation interprets one of the sector tests already
+used. Here $p\equiv1\pmod4$ is prime, $a\equiv3\pmod4$,
+$3\le a<p$, $x=(p+a)/4$, and $x=\prod q^{e_q}$,
+$d=\prod q^{j_q}$ in the notation of Lemma~\ref{lem:dictionary}.
+
+\begin{proposition}[Reciprocity interpretation]\label{prop:resource}
+For every prime factor $q\mid x$,
+\begin{equation}\label{eq:reciprocity}
+ \left(\frac q p\right)=\left(\frac q a\right),
+\end{equation}
+where the right hand side is the Jacobi symbol. The character
+$\chi_a(n)=(n/a)$ on the unit group modulo $a$ is nonprincipal and odd.
+Thus the corresponding sector count is exactly
+\[
+ Z_{a,\chi_a}(p)=
+ \#\{Q<q\le Z:q\mid x,\ q\text{ prime},\ (q/p)=-1\}.
+\]
+For each Type~II witness $d\mid x^2$, the primitive resource is
+\[
+ R=uv=\frac{dx}{(d,x)^2}
+      =\prod_{q\mid x}q^{|j_q-e_q|}\mid x.
+\]
+It satisfies $(R/p)=-1$, and in particular
+$R\ge n_-(p)$, the least positive quadratic nonresidue modulo $p$.
+\end{proposition}
+\begin{proof}
+For odd $q\mid x$, $p\equiv-a\pmod q$ and quadratic reciprocity give
+\[
+ (q/p)=(p/q)=(-a/q)
+ =(-1/q)(a/q)=(q/a),
+\]
+because $p\equiv1\pmod4$ and $a\equiv3\pmod4$ make the two signs
+in the last step cancel. If $q=2$, then $p\equiv-a\pmod8$, so the
+supplementary law gives $(2/p)=(2/a)$.
+The value $\chi_a(-1)=-1$ proves that $\chi_a$ is odd and nonprincipal.
+Its values on primes dividing $x$ are $\pm1$, so its sector is exactly
+the negative-value set just displayed.
+
+The formula for $R$ follows prime by prime from
+Lemma~\ref{lem:dictionary}. In Type~II, $u/v\equiv-1\pmod a$.
+As Jacobi values on units are $\pm1$,
+\[
+ \chi_a(uv)=\chi_a(u)\chi_a(v)^{-1}
+          =\chi_a(uv^{-1})=\chi_a(-1)=-1.
+\]
+Multiplicativity and \eqref{eq:reciprocity} now give $(R/p)=-1$.
+The least-nonresidue bound follows from its definition.
+\end{proof}
+
+This identifies the quadratic-character sector condition with
+prime-specific arithmetic: on the sufficient good set, every prescribed
+$x_a$ has at least $L/8$ distinct nonresidue prime factors in the
+specified window. The resource $uv$ is a divisor of $x_a$ attached to the primitive
+ratio of a Type~II witness.
+
+\subsection{Parameter budget}
+The catalogue and exceptional-set exponents can be separated. Keep
+$c=2^{-14}$, $r=\lfloor cL\rfloor$, and $\beta=10c\log2$.
+For fixed $\eta,\sigma>0$, a sufficient budget for a catalogue
+$a\le2(\log N)^\eta$ and an exceptional-proportion saving
+$(\log N)^{-\sigma}$ is
+\begin{equation}\label{eq:separate-budget}
+\begin{gathered}
+ \eta<\min\{1/4,\ (\log2)/16,\ (\log3)/8\},\\
+ 2\eta+\sigma<2c\log2,\qquad 2\eta+\sigma<4-\beta.
+\end{gathered}
+\end{equation}
+The first line makes the errors in the uniform mean estimates and both
+auxiliary Fourier estimates tend to zero. The full-box estimate then
+has relative error $O((\log N)^{\eta-\log3/8})$.
+There are $O((\log N)^{2\eta})$ original statistics; the second line
+pays for their union in the moment and BV estimates. The broader
+window $W=2(\log N)^\eta$ adds only $O((\log N)^\eta)$ statistics,
+and its mean is still $L-O_\eta(\log L)$. Its threshold argument works
+for every fixed $\theta<15/16$. Constants and onsets may depend on
+these fixed parameters. The present choice $\eta=\sigma=\delta$
+satisfies these inequalities with room to spare. This is a sufficient
+budget, not an optimization.
+
+The all-class estimate supplies both targets $-1$ and $-p^{-1}$
+without another union over residue classes. The resulting $2:1$ ratio
+holds on the common good set. It can fail at an individual position:
+$(p,a,x)=(53,7,15)$ has $\FI=2$ and $\FII=0$.
+
+The supplementary exact checks cover the divisor dictionary, complete
+local counts, prime-power boxes, recovery multiplicities, and the
+coefficient budgets. Their finite ranges and arithmetic conventions
+are recorded with the verification code.
+
+\appendix
+\section{Squarefree subfamilies and one-sided recovery}\label{app:auxiliary}
+The complete-count argument also supplies useful squarefree
+subfamilies. Three-way allocation of coprime factors, and its $3^K$
+count, already occurs in Browning and Elsholtz \cite[Section~2]{BE}
+and Elsholtz and Planitzer \cite[Section~7]{EP}.
+
+\subsection{Binary and ternary character estimates}
+\begin{lemma}[Binary subset products]\label{lem:binary}
+Let $G$ be a finite abelian group, $K\in\mathbb Z_{\ge0}$, $m\ge0$,
+and $g_1,\ldots,g_K\in G$. Suppose that every nonprincipal character
+has at least $m$ indices $i$ with $\Re\chi(g_i)\le0$.
+If $D(b)$ counts subsets with product $b$, then
+\begin{equation}\label{eq:fourier-bound}
+ \left|\frac{|G|D(b)}{2^K}-1\right|
+ \le(|G|-1)2^{-m/2}\qquad(b\in G).
+\end{equation}
+If the right-hand side is at most $1/2$, then
+$D(b)\ge2^{K-1}/|G|$ for every $b\in G$.
+\end{lemma}
+\begin{proof}
+Let $\nu(b)=2^{-K}D(b)$, and use the Fourier convention
+\[
+ \widehat\nu(\chi)=\sum_{b\in G}\nu(b)\chi(b),\qquad
+ \nu(b)=\frac1{|G|}\sum_{\chi\in\widehat G}
+                \widehat\nu(\chi)\overline{\chi(b)}.
+\]
+Expanding over the choice of each index gives the exact identity
+\[
+ \widehat\nu(\chi)=\prod_{i=1}^K\frac{1+\chi(g_i)}2.
+\]
+Every factor has absolute value at most $1$. On the specified $m$ indices,
+\[
+ \left|\frac{1+\chi(g_i)}2\right|^2
+     =\frac{1+\operatorname{Re}\chi(g_i)}2\le\frac12.
+\]
+The nonprincipal Fourier coefficients therefore have absolute value at
+most $2^{-m/2}$. The principal coefficient is exactly $1$, so Fourier
+inversion and the triangle inequality give \eqref{eq:fourier-bound}.
+For the trivial group the nonprincipal sum is empty and the error is zero.
+When $K=0$, the only subset is the empty subset; the same formulas apply.
+\end{proof}
+
+\begin{lemma}\label{lem:ternary}
+Let $G$ be a finite abelian group, $K\in\mathbb Z_{\ge0}$, $m\ge0$, and
+$g_1,\ldots,g_K\in G$. For $b\in G$, let $T(b)$ count assignments
+$\epsilon_i\in\{-1,0,1\}$ with $\prod_i g_i^{\epsilon_i}=b$.
+If every nonprincipal character has at least $m$ indices $i$ with
+$\operatorname{Re}\chi(g_i)\le0$, then
+\begin{equation}\label{eq:ternary-fourier-bound}
+ \left|\frac{|G|T(b)}{3^K}-1\right|
+ \le (|G|-1)3^{-m}.
+\end{equation}
+In particular, if the right-hand side is at most $1/2$, then
+$T(b)\ge3^K/(2|G|)$ for every $b\in G$.
+\end{lemma}
+\begin{proof}
+The normalized character transform of the three choices at index $i$ is
+\[
+ \frac{1+\chi(g_i)+\chi(g_i)^{-1}}3
+ =\frac{1+2\operatorname{Re}\chi(g_i)}3.
+\]
+It has absolute value at most $1$ in general and at most $1/3$ when
+$\operatorname{Re}\chi(g_i)\le0$. Hence every nonprincipal coefficient has absolute value
+at most $3^{-m}$, while the principal coefficient is $1$. Fourier inversion
+proves \eqref{eq:ternary-fourier-bound}; the trivial-group and $K=0$
+cases are immediate.
+\end{proof}
+
+\subsection{Simultaneous window supply}
+For a unit class $b\pmod a$, let $D_{a,p}(b)$ count subsets of
+$\cQ_a(p)$ whose product is $b$ modulo $a$, with the empty product equal
+to $1$. Let $T_{a,p}(b)$ count ordered pairs $(u,v)$ obtained as products
+of disjoint subsets of $\cQ_a(p)$ with $u/v\equiv b\pmod a$.
+The ratio is taken in the unit group. There are three choices per
+window prime, and every such pair satisfies $(u,v)=1$ and $uv\mid x_a$.
+
+\begin{theorem}[Auxiliary squarefree-window supply]\label{thm:supply}
+With \eqref{eq:parameters} and \eqref{eq:badset},
+\[
+ |\cB_N|\ll|\cP_N|(\log N)^{-\delta}.
+\]
+Every $p\in\cP_N\setminus\cB_N$ satisfies, simultaneously for all
+$a\in\cA_N$ and all unit classes $b\pmod a$,
+\begin{equation}\label{eq:supply}
+\begin{gathered}
+ K_a(p)\ge L/2,\qquad
+ D_{a,p}(b)\ge\frac{2^{K_a(p)-1}}{\varphi(a)},\\
+ T_{a,p}(b)\ge\frac{3^{K_a(p)}}{2\varphi(a)}
+ \ge\frac{(\log N)^{\gamma_0}}{2\varphi(a)},
+ \qquad \gamma_0=\frac{\log3}{2}.
+\end{gathered}
+\end{equation}
+\end{theorem}
+\begin{proof}
+The exceptional-set estimate is Proposition~\ref{prop:commonbad}.
+For every remaining $p$, all $a\in\cA_N$ simultaneously satisfy
+\[
+ K_a(p)\ge L/2,\qquad
+ Z_{a,\chi}(p)\ge L/8\quad(\chi\ne\chi_0).
+\]
+Apply Lemma~\ref{lem:binary} and Lemma~\ref{lem:ternary} to the residues
+of the distinct primes in $\cQ_a(p)$. The binary relative error is at most
+\[
+ (\varphi(a)-1)2^{-L/16}
+ \le2(\log N)^{\delta-\log2/16}=o(1),
+\]
+while the ternary relative error is at most
+\[
+ (\varphi(a)-1)3^{-L/8}
+ \le2(\log N)^{\delta-\log3/8}=o(1).
+\]
+Both are eventually at most $1/2$, uniformly in $a$. Thus every unit class
+satisfies both the displayed binary bound and
+$T_{a,p}(b)\ge3^{K_a(p)}/(2\varphi(a))$. Since
+$3^{L/2}=(\log N)^{\gamma_0}$, the last ternary lower bound in
+\eqref{eq:supply} follows. The selected primes are distinct actual divisors
+of $x_a$; this verifies the integer-divisor interpretation as well as both
+residue-class counts.
+\end{proof}
+
+The exponent $\gamma_0=(\log3)/2$ concerns this selected window;
+Corollary~\ref{cor:many} uses the broader total-factor window.
+
+\subsection{A one-sided Type~II construction}
+\begin{lemma}\label{lem:recovery}
+Let $p$ be prime, $a\equiv3\pmod4$, $3\le a<p$, and $p\equiv1\pmod4$.
+Put $x=(p+a)/4$. If $d$ is a positive divisor of $x$ and
+$d\equiv-1\pmod a$, then, with
+\begin{equation}\label{eq:recovery}
+ h=\frac{d+1}{a},\qquad y=\frac{phx}{d},\qquad z=phx,
+\end{equation}
+we have a Type~II solution $x<y<z$ of \eqref{eq:es}. Distinct such $d$
+give distinct unordered triples at the fixed position $x$.
+\end{lemma}
+\begin{proof}
+All quantities in \eqref{eq:recovery} are positive integers. Since
+$d\equiv-1\pmod a$ and $a\ge3$, we have $d\ge a-1\ge2$. Moreover
+\[
+ \frac1x+\frac1y+\frac1z
+ =\frac1x+\frac{d+1}{phx}
+ =\frac{p+a}{px}=\frac4p.
+\]
+Both $y$ and $z$ are multiples of $p$ and at least $p$, whereas
+$x<p/2$. Hence $x$ is strictly smallest, $p\nmid x$, and $z/y=d>1$.
+The ratio of the larger to the smaller of the remaining two denominators
+recovers $d$ from the unordered triple, proving injectivity.
+\end{proof}
+
+\section{Fixed catalogues from earlier inputs}\label{app:fixed}
+The following consequence explains the distinction between the
+fixed-catalogue precedent and the uniform quantitative application.
+
+\begin{proposition}[Fixed-catalogue consequence]\label{prop:fixed-known}
+Let $\mathcal A\subset\{3,7,11,\ldots\}$ be fixed and finite. On a relative-density-one set of primes
+$p\equiv1\pmod4$, simultaneously for $a\in\mathcal A$ and
+$x_a=(p+a)/4$,
+\[
+ \FI(p,x_a)\sim\frac{\tau(x_a^2)}{\varphi(a)},\qquad
+ \FII(p,x_a)\sim\frac{\tau(x_a^2)}{2\varphi(a)}.
+\]
+For every fixed $0<\eps<\log3$, each count is also
+$\gg_{\mathcal A,\eps}(\log p)^{\log3-\eps}$ on a possibly
+smaller relative-density-one set.
+\end{proposition}
+\begin{proof}
+For fixed $a$ and a nonprincipal character $\chi\bmod a$, define
+the nonnegative strongly additive function
+\[
+ w_{a,\chi}(n)=\sum_{\substack{q\mid n\\q\nmid a}}
+                      \one_{\Re\chi(q)\le0}.
+\]
+Let $\sigma_\chi=|S_\chi|/\varphi(a)$. Lemma~\ref{lem:sector}
+gives $\sigma_\chi\ge1/3$. The prime number theorem in fixed
+arithmetic progressions gives
+\[
+ \sum_{q\le N}\frac{w_{a,\chi}(q)}{q-1}
+       =\sigma_\chi\log\log N+O_a(1),\qquad
+ \max_{q\le N}w_{a,\chi}(q)\le1.
+\]
+The fixed-shift normal-order theorem of Barban and Elliott, recalled
+as Lemma~A.3 of \cite{ET}, therefore applies to $p+a$.
+After a finite union over $(a,\chi)$, its conclusion holds for all
+$w_{a,\chi}(p+a)$ outside $o(\pi(X))$ primes up to $X$.
+Since $\pi(X;4,1)\sim\pi(X)/2$, restricting to $p\equiv1\pmod4$
+preserves relative density one. On this progression $x_a$ is an
+integer, and dividing $p+a$ by $4$ removes at most one distinct prime
+factor. Consequently, on a relative-density-one set in this progression,
+\[
+ w_{a,\chi}(x_a)\ge\tfrac14\log\log p
+ \qquad(a\in\mathcal A,\ \chi\ne\chi_0).
+\]
+Lemma~\ref{lem:box} now yields, uniformly over
+this fixed catalogue and all unit classes $b$,
+\[
+ C_{a,x_a}(b)=\frac{\tau(x_a^2)}{\varphi(a)}
+ \left(1+O_{\mathcal A}((\log p)^{-(\log3)/4})\right).
+\]
+Proposition~\ref{prop:exact} gives the asserted complete counts.
+
+Apply the same fixed-shift normal-order theorem to $w=\omega$.
+Restricting to the same progression and dividing by $4$ as above gives,
+for all $a\in\mathcal A$ simultaneously,
+$\omega(x_a)=(1+o(1))\log\log p$ on a relative-density-one set there.
+Since $\tau(x_a^2)\ge3^{\omega(x_a)}$, the claimed lower bounds
+follow, with any fixed positive $\eps$ providing the exponent margin.
+\end{proof}
+
+This deduction uses finitely many fixed shifts and supplies an
+$o(\pi(X))$ exceptional set. The common logarithmic-power estimate
+for a specified growing catalogue requires the uniform calculation
+in the main text or Appendix~\ref{app:elliott}.
+
+\subsection{The per-class divisor route}
+For fixed $J_0$ and $0<\eps<\log2$, the per-class divisor estimates in
+the final part of the proof of Bettin et al.\
+\cite[Lemma~4.9 and equation~(4.3)]{Bettin} also imply
+\begin{equation}\label{eq:bettin-fixed}
+ \FII\bigl(p,(p+3)/4+j\bigr)
+ \gg_{J_0,\eps}(\log p)^{\log2-\eps}
+ \qquad(0\le j<J_0)
+\end{equation}
+for a density-one set of the relevant primes. This is an extraction
+from their proof, not an Erd\H{o}s--Straus theorem named there.
+Indeed, for a fixed $a=3+4j$, take their shift $p_0=-a$, modulus
+$4a$, and unit class $2a-1$. Their estimate supplies
+$\gg_{a,\eps}(\log p)^{\log2-\eps}$ divisors $d\mid p+a$ in that class.
+Such $d$ are odd, hence divide $x=(p+a)/4$, and satisfy $d\equiv-1\pmod a$.
+Lemma~\ref{lem:recovery} converts different $d$ into different solutions.
+A finite union over the fixed shifts proves \eqref{eq:bettin-fixed}.
+This argument does not extract uniform constants for growing $J_0$ or
+the explicit exceptional-set estimate \eqref{eq:global-exception}.
+
+\section{An alternative transfer by Elliott's model}\label{app:elliott}
+Elliott's Bernoulli approximation, in the explicit form of
+\cite[Theorem~1.1]{Gorodetsky}, can replace the moment transfer.
+We verify its hypotheses uniformly for the growing shifts.
+In the form we use, let $V$ take values in $[1,T]\cap\mathbb N$,
+let $2\le y\le T$, let $\mathcal Q$ be a set of primes at most $y$, and let
+$g:\mathbb N\to[0,1]$ be multiplicative, vanish off
+$\langle\mathcal Q\rangle$, and satisfy $g(q)<1$ for $q\in\mathcal Q$.
+Let $B_q$ be independent Bernoulli variables with means $g(q)$ and put
+$S=\sum_{q\le y}g(q)\log q/(1-g(q))$.
+For $S>0$ and $\log z\ge8\max\{\log y,S\}$, Elliott's bound is
+\begin{align}
+ &d_{\mathrm{TV}}\bigl((\one_{q\mid V})_{q\in\mathcal Q},
+                         (B_q)_{q\in\mathcal Q}\bigr)\notag\\
+ &\quad\le10\exp\left(-\frac{\log z}{8\log y}
+                              \log\frac{\log z}{S}\right)
+ +12\!\sum_{\substack{d\le z^4\\d\in\langle\mathcal Q\rangle}}
+       \mu^2(d)4^{\omega(d)}\bigl|\Prob(d\mid V)-g(d)\bigr|.
+       \label{eq:elliott-input}
+\end{align}
+Keep \eqref{eq:parameters} and \eqref{eq:wide-definition}, and put
+\[
+\begin{gathered}
+ y=Z,\qquad z=N^{1/16},\qquad H=|\cP_N|,\\
+ P_0=\frac{\Li(2N)-\Li(N)}2,\qquad
+ \mathcal Q_N=\{q\text{ prime}:W<q\le Z\}.
+\end{gathered}
+\]
+For $a\in\cA_N$, choose $p$ uniformly from $\cP_N$; then
+$x_a=(p+a)/4$ is an integer in $[1,N]$ for sufficiently large $N$.
+Let $(B_q)_{q\in\mathcal Q_N}$ be independent Bernoulli variables
+with $\Prob(B_q=1)=1/(q-1)$.
+
+\begin{proposition}[Uniform Bernoulli approximation]\label{prop:elliott-uniform}
+For every fixed $B>0$,
+\begin{equation}\label{eq:elliott-tv}
+ \sup_{a\in\mathcal A_N}
+ d_{\mathrm{TV}}\!\left(
+   (\one_{q\mid x_a})_{q\in\mathcal Q_N},
+   (B_q)_{q\in\mathcal Q_N}\right)
+ \ll_B(\log N)^{-B}.
+\end{equation}
+The implied constant is independent of the growing shift $a$.
+\end{proposition}
+\begin{proof}
+Define the multiplicative function $g$ by $g(1)=1$,
+$g(q^j)=1/\varphi(q^j)$ for $q\in\mathcal Q_N$, $j\ge1$, and
+$g(d)=0$ outside the semigroup $\langle\mathcal Q_N\rangle$.
+This takes values in $[0,1]$ and has $g(q)<1$ at every window prime.
+The parameter in Elliott's theorem satisfies
+\[
+ S=\sum_{W<q\le y}\frac{\log q}{q-2}
+ \le\log y+O(1)\le2\log y.
+\]
+Here Mertens' estimate for $\sum_{q\le y}(\log q)/q$ suffices;
+the correction from $q$ to $q-2$ has a bounded sum over $q\ge3$.
+Since $\log z/\log y=r/2$, the hypothesis
+$\log z\ge8\max\{\log y,S\}$ holds once $r\ge32$.
+The first term of Elliott's bound is then at most
+\begin{equation}\label{eq:elliott-exponential}
+ 10\exp\!\left(-\frac r{16}\log\frac r4\right)
+ \ll_B(\log N)^{-B}.
+\end{equation}
+The last assertion follows from $r\sim c\log\log N$.
+
+It remains to bound the theorem's weighted remainder sum, whose range
+is $d\le z^4=D=N^{1/4}$ and whose weight is
+$\mu^2(d)4^{\omega(d)}$. Every $d\in\langle\mathcal Q_N\rangle$
+is odd and coprime to every $a\in\mathcal A_N$. The congruences
+$p\equiv1\pmod4$ and $p\equiv-a\pmod d$ specify one reduced class
+modulo $4d$. Consequently, on writing
+\[
+ \#\{p\in\mathcal P_N:d\mid x_a\}
+   =\frac{P_0}{\varphi(d)}+R_a(d),
+\]
+we have the exact normalization
+\begin{equation}\label{eq:elliott-normalization}
+ \Prob(d\mid x_a)-g(d)
+ =\frac{R_a(d)}H+\frac{P_0-H}{H\varphi(d)}.
+\end{equation}
+Define
+\[
+ E_d=\max_{(b,4d)=1}
+ \left|\pi(2N;4d,b)-\pi(N;4d,b)
+       -\frac{\Li(2N)-\Li(N)}{\varphi(4d)}\right|.
+\]
+Then $|R_a(d)|\le E_d$ uniformly in $a$. Equation~\eqref{eq:bv} gives, for every fixed $A>0$
+\begin{equation}\label{eq:elliott-bv}
+ \sum_{d\le D}E_d\ll_A N(\log N)^{-A}.
+\end{equation}
+Indeed, the moduli $4d\le4N^{1/4}$ are strictly within its range.
+The trivial count of integers in a residue class also gives
+$E_d\ll N/\varphi(d)$ for $d\le D$.
+For each fixed positive integer $j$, an Euler product and Mertens'
+estimate yield
+\begin{equation}\label{eq:elliott-euler}
+ \sum_{d\le D}\frac{\mu^2(d)j^{\omega(d)}}{\varphi(d)}
+ \le\prod_{q\le D}\left(1+\frac j{q-1}\right)
+ \ll_j(\log(2D))^j.
+\end{equation}
+Cauchy--Schwarz, followed by \eqref{eq:elliott-bv} and
+\eqref{eq:elliott-euler} with $j=16$, therefore gives
+\begin{align}
+ \sum_{\substack{d\le D\\d\in\langle\mathcal Q_N\rangle}}
+       \mu^2(d)4^{\omega(d)}E_d
+ &\le
+ \left(\sum_{d\le D}\mu^2(d)16^{\omega(d)}E_d\right)^{1/2}
+ \left(\sum_{d\le D}E_d\right)^{1/2}\notag\\
+ &\ll_A N(\log N)^{8-A/2}.\label{eq:elliott-weighted-bv}
+\end{align}
+
+Since $H\asymp N/\log N$, its normalized contribution is
+$O_A((\log N)^{9-A/2})$.
+Also $|P_0-H|\le E_1\ll_A N(\log N)^{-A}$. Its contribution in
+\eqref{eq:elliott-normalization}, using
+\eqref{eq:elliott-euler} with $j=4$, is
+$O_A((\log N)^{5-A})$.
+Taking, for example, $A=2B+20$ bounds both remainder contributions
+by $O_B((\log N)^{-B})$. Together with
+\eqref{eq:elliott-exponential} and Elliott's absolute factor $12$,
+this proves \eqref{eq:elliott-tv}.
+\end{proof}
+
+\subsection{The common good set}
+The sector and total-factor statistics in \eqref{eq:statistics} and
+\eqref{eq:wide-definition} are functions of this one divisor vector.
+Their model means satisfy \eqref{eq:mean-bounds} and
+\eqref{eq:wide-mean}; every failed threshold forces a deviation of
+at least $t_0=L/16$. Lemma~\ref{lem:moment} and
+\eqref{eq:normalized-moment} bound each model failure probability
+by $4\,2^{-4r}$.
+
+For each fixed $a$, take the union of all its failed sector tests
+and its two failed total tests as a single event of the vector in
+\eqref{eq:elliott-tv}. The comparison error is paid once for this
+union, not once per character. Hence the enlarged bad set
+$\mathcal B_N^*$ satisfies
+\begin{align}
+ \frac{|\mathcal B_N^*|}{H}
+ &\le\sum_{a\in\mathcal A_N}
+     \left(4(\varphi(a)+1)2^{-4r}
+                +O_B((\log N)^{-B})\right)\notag\\
+ &\ll_{B,\theta}
+   (\log N)^{2\delta-2c\log2}
+     +(\log N)^{\delta-B}
+ \ll_\theta(\log N)^{-\delta},\label{eq:elliott-common-bad}
+\end{align}
+where $B>2\delta$ is fixed and $2c\log2>3\delta$.
+Omitting the wider total test gives Proposition~\ref{prop:commonbad}.
+Including it gives Proposition~\ref{prop:wide}, and the deterministic
+argument of Section~4 completes the same local-count and multiplicity
+conclusions. For each $a$ this is a joint approximation of its divisor
+vector; shifts are combined by a union bound.
+
+\section{The distribution inputs in the required normalization}\label{app:inputs}
+We spell out the standard consequences used in Section~\ref{sec:good}. Write
+$\Lambda_{\mathrm{vM}}$ for the von Mangoldt function, and let
+\[
+ \psi(t;\chi)=\sum_{n\le t}\Lambda_{\mathrm{vM}}(n)\chi(n),
+ \qquad
+ \vartheta(t;a,b)=\sum_{\substack{q\le t\\q\equiv b\ (a)}}\log q.
+\]
+For a reduced class, $\psi(t;a,b)$ denotes the analogous sum of
+$\Lambda_{\mathrm{vM}}(n)$ over all integers in that class.
+
+\subsection{Siegel--Walfisz and the harmonic means}
+The character version on p.~2 of \cite{VaughanBV} gives, for fixed
+$B>0$ and every character modulo $a\le(\log t)^B$,
+\[
+ \psi(t;\chi)-\one_{\chi=\chi_0}t
+     \ll_B t\exp(-c_B\sqrt{\log t})
+\]
+with some $c_B>0$. Character orthogonality, equation~(6) there,
+gives the same error for a reduced progression: the number of characters
+cancels the factor $1/\varphi(a)$.\footnote{We use the character
+statement; the preceding progression display in that version of the notes
+omits the factor $t$ in its error term.}
+
+The prime powers contribute $O(\sqrt t\log^2t)$, uniformly in the
+progression. Partial summation (equation~(4), p.~1 of \cite{VaughanBV})
+then gives \eqref{eq:sw}. For completeness, when $a\le\log t$, split
+the integral at $\sqrt t$. In the upper part, $a\le(\log u)^2$ for
+all $u\ge\sqrt t$ once $t$ is large, so the character bound applies
+with the single fixed choice $B=2$. In the lower part the trivial bound
+contributes at most $O(\sqrt t\log^2t)$. Exponential decay absorbs
+every prescribed fixed power $(\log t)^{-H}$. The usual possible
+ineffectivity of Siegel--Walfisz remains; it does not create an unproved
+input or an effective onset.
+
+In our application $a\le2(\log N)^\delta\le\log Q$ eventually.
+Applying partial summation to $1/q$ on $(Q,Z]$ with $H=9$ bounds the
+integrated error by $O((\log Q)^{-8})$. Replacing $1/q$ by
+$1/(q-1)$ costs at most $O(\sum_{n>Q}n^{-2})=O(Q^{-1})$.
+This proves \eqref{eq:lambda} with constants independent of $a$, its
+unit class, and the growing order $r$.
+
+\subsection{The dyadic prime-counting form of Bombieri--Vinogradov}
+The two-term bound on p.~3 of \cite{VaughanBV} states, for fixed $A_0>0$,
+\begin{align*}
+ &\sum_{m\le M}\max_{(v,m)=1}\sup_{1\le u\le T}
+   \left|\psi(u;m,v)-\frac{u}{\varphi(m)}\right|\\
+ &\hspace{2cm}\ll_{A_0}
+    T(\log T)^{-A_0}+T^{1/2}M\bigl(\log(TM)\bigr)^6.
+\end{align*}
+Use $T=2N$, $M=4N^{1/4}$, and denote the maximum and supremum
+for a fixed $m$ by $E_m$. The second term is
+$O(N^{3/4}(\log N)^6)$ and is smaller than every fixed logarithmic
+saving relative to $N$.
+
+For $N\le u\le2N$, put
+$\Delta_m(u;v)=\vartheta(u;m,v)-u/\varphi(m)$. Removing prime powers
+gives
+\[
+ \max_{(v,m)=1}\sup_{N\le u\le2N}|\Delta_m(u;v)|
+       \le E_m+O(\sqrt N\log^2N).
+\]
+The exact dyadic partial-summation identity is
+\begin{align*}
+ &\pi(2N;m,v)-\pi(N;m,v)
+       -\frac{\Li(2N)-\Li(N)}{\varphi(m)}\\
+ &\quad=\frac{\Delta_m(2N;v)}{\log(2N)}
+       -\frac{\Delta_m(N;v)}{\log N}
+       +\int_N^{2N}\frac{\Delta_m(u;v)}{u\log^2u}\,du.
+\end{align*}
+After maximizing and summing, its absolute value is bounded by
+\[
+ \ll\frac1{\log N}\left(\sum_{m\le M}E_m
+                           +M\sqrt N\log^2N\right).
+\]
+Choose $A_0=A+1$. Both terms of size $N^{3/4}$ are absorbed, giving
+\eqref{eq:bv}. The proof uses only the interval $[N,2N]$ at the
+partial-summation step, so no modulus-level assumption at much smaller
+integration variables is needed.
+
+\begin{thebibliography}{99}
+\small
+\raggedright
+\bibitem{BE}
+T. D. Browning and C. Elsholtz,
+\emph{The number of representations of rationals as a sum of unit fractions},
+Illinois J. Math. \textbf{55} (2011), 685--696.
+\href{https://www.math.tugraz.at/~elsholtz/WWW/papers/papers33FINAL2013.pdf}{Author-hosted published version}.
+
+\bibitem{EP}
+C. Elsholtz and S. Planitzer,
+\emph{The number of solutions of the Erd\H{o}s--Straus equation and sums
+of $k$ unit fractions}, Proc. Roy. Soc. Edinburgh Sect. A
+\textbf{150} (2020), 1401--1427.
+\href{https://doi.org/10.1017/prm.2018.137}{doi};
+\href{https://arxiv.org/abs/1805.02945v1}{arXiv:1805.02945v1}.
+
+\bibitem{Chamberland}
+M. Chamberland,
+\emph{The Erd\H{o}s--Straus conjecture and the structure of primes},
+Integers \textbf{26} (2026), Paper A42, 7 pp.
+\href{https://math.colgate.edu/~integers/aa42/aa42.pdf}{Journal PDF}.
+
+\bibitem{Bradford}
+K. Bradford,
+\emph{Elementary patterns from the Erd\H{o}s--Straus conjecture},
+Integers \textbf{25} (2025), Paper A54, 10 pp.
+\href{https://doi.org/10.5281/zenodo.15755958}{doi:10.5281/zenodo.15755958}.
+
+\bibitem{Dahan}
+B. Dahan,
+\emph{Sieve dimension and search depth for the Erd\H{o}s--Straus conjecture,
+$n\equiv1\pmod{24}$}, preprint, 2026,
+\href{https://arxiv.org/abs/2608.24035v1}{arXiv:2608.24035v1}.
+
+\bibitem{ET}
+C. Elsholtz and T. Tao,
+\emph{Counting the number of solutions to the Erd\H{o}s--Straus equation
+on unit fractions}, J. Aust. Math. Soc. \textbf{94} (2013), 50--105.
+Revised author version:
+\href{https://arxiv.org/abs/1107.1010v6}{arXiv:1107.1010v6} (2015).
+
+\bibitem{Bettin}
+S. Bettin, J. Bober, A. Booker, B. Conrey, M. Lee, G. Molteni,
+T. Oliver, D. J. Platt, and R. Steiner,
+\emph{A conjectural extension of Hecke's converse theorem},
+Ramanujan J. \textbf{47} (2018), 659--684, Lemma~4.9.
+\href{https://doi.org/10.1007/s11139-017-9953-y}{doi};
+\href{https://arxiv.org/abs/1704.02570}{arXiv:1704.02570}.
+
+\bibitem{Hall}
+R. R. Hall, \emph{The divisors of $p-1$},
+Mathematika \textbf{20}(1) (1973), 87--97.
+\href{https://doi.org/10.1112/S0025579300003661}{doi}.
+
+\bibitem{Ford}
+K. Ford,
+\emph{Poisson approximation of prime divisors of shifted primes},
+Int. Math. Res. Not. IMRN 2025(7), rnaf079.
+\href{https://doi.org/10.1093/imrn/rnaf079}{doi};
+\href{https://arxiv.org/abs/2408.03803v4}{arXiv:2408.03803v4}.
+
+\bibitem{Gorodetsky}
+O. Gorodetsky,
+\emph{A Kubilius model for sieve-theoretic sequences},
+Analysis Mathematica (2026), doi:10.1007/s10476-026-00178-w.
+\href{https://doi.org/10.1007/s10476-026-00178-w}{doi};
+\href{https://arxiv.org/abs/2608.14190v1}{arXiv:2608.14190v1}.
+
+\bibitem{PW}
+C. Pomerance and A. Weingartner,
+\emph{Exceptions to the Erd\H{o}s--Straus--Schinzel conjecture},
+Ramanujan J. \textbf{69} (2026), 31.
+\href{https://doi.org/10.1007/s11139-025-01312-2}{doi};
+\href{https://arxiv.org/abs/2511.16817}{arXiv:2511.16817}.
+
+\bibitem{Bello}
+M. Bello--Hern\'andez, M. Benito, and E. Fern\'andez,
+\emph{A divisor parametrization for the Erd\H{o}s--Straus conjecture},
+arXiv:2606.10922 (2026).
+\href{https://arxiv.org/abs/2606.10922}{arXiv:2606.10922}.
+
+\bibitem{VaughanBV}
+R. C. Vaughan,
+\emph{The Bombieri--Vinogradov theorem}, author lecture notes, Section~1.
+\url{https://personal.science.psu.edu/rcv4/Bombieri.pdf}.
+Accessed October 28, 2026.
+\end{thebibliography}
+\end{document}
